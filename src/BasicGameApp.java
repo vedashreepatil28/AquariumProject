@@ -38,13 +38,16 @@ public class BasicGameApp implements Runnable {
    public JPanel panel;
    
 	public BufferStrategy bufferStrategy;
+    public Image backgroundPic;
 	public Image kittyPic;
     public Image ratPic;
+    public Image foodPic;
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 	private Cat kitty;
     private Mice rat;
+    private Cheese food;
 
 
    // Main method definition
@@ -65,11 +68,16 @@ public class BasicGameApp implements Runnable {
        
       //variable and objects
       //create (construct) the objects needed for the game and load up 
-		kittyPic = Toolkit.getDefaultToolkit().getImage("cat.png"); //load the picture
-		kitty = new Cat(10,100);
+        backgroundPic = Toolkit.getDefaultToolkit().getImage("background.png"); //load the picture
+
+        kittyPic = Toolkit.getDefaultToolkit().getImage("cat.png"); //load the picture
+		kitty = new Cat(250,100);
 
         ratPic = Toolkit.getDefaultToolkit().getImage("rat.png"); //load the picture
         rat = new Mice(400,100);
+
+        foodPic = Toolkit.getDefaultToolkit().getImage("Cheese.png"); //load the picture
+        food = new Cheese(400,100);
 
 
 	}// BasicGameApp()
@@ -99,6 +107,7 @@ public class BasicGameApp implements Runnable {
       //calls the move( ) code in the objects
 		kitty.move();
         rat.move();
+        food.move();
 
 	}
 	
@@ -149,8 +158,10 @@ public class BasicGameApp implements Runnable {
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 
       //draw the image of the astronaut
+        g.drawImage(backgroundPic, 0, 0, 1000, 700, null);
 		g.drawImage(kittyPic, kitty.xpos, kitty.ypos, kitty.width, kitty.height, null);
         g.drawImage(ratPic, rat.xpos, rat.ypos, rat.width, rat.height, null);
+        g.drawImage(foodPic,food.xpos, food.ypos, food.width, rat.height, null);
 
 		g.dispose();
 

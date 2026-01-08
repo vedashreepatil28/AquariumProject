@@ -24,8 +24,8 @@ public class Cat {
         public Cat(int pXpos, int pYpos) {
             xpos = pXpos;
             ypos = pYpos;
-            dx =1;
-            dy =0;
+            dx =0;
+            dy =1;
             width = 60;
             height = 60;
             isAlive = true;
