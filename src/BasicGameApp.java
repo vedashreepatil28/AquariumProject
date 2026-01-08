@@ -68,8 +68,8 @@ public class BasicGameApp implements Runnable {
 		kittyPic = Toolkit.getDefaultToolkit().getImage("cat.png"); //load the picture
 		kitty = new Cat(10,100);
 
-        ratPic = Toolkit.getDefaultToolkit().getImage("cat.png"); //load the picture
-        rat = new Mice(10,100);
+        ratPic = Toolkit.getDefaultToolkit().getImage("rat.png"); //load the picture
+        rat = new Mice(400,100);
 
 
 	}// BasicGameApp()
