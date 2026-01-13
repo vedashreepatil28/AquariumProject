@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public class Cheese {
     //VARIABLE DECLARATION SECTION
     //Here's where you state which variables you are going to use.
@@ -8,7 +10,8 @@ public class Cheese {
     public int dy;                    //the speed of the hero in the y direction
     public int width;
     public int height;
-    public boolean isAlive;            //a boolean to denote if the hero is alive or dead.
+    public boolean isAlive;//a boolean to denote if the hero is alive or dead.
+    public Rectangle hitbox;    //a hit box for the cheese
 
 
     // METHOD DEFINITION SECTION
@@ -27,6 +30,8 @@ public class Cheese {
         width = 60;
         height = 60;
         isAlive = true;
+        hitbox = new Rectangle(xpos, ypos, width, height);
+
 
     } // constructor
 
@@ -34,6 +39,8 @@ public class Cheese {
     public void move() {
         xpos = xpos + dx;
         ypos = ypos + dy;
+        hitbox = new Rectangle(xpos, ypos, width, height);
+
 
     }
 

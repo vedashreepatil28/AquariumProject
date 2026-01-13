@@ -1,3 +1,4 @@
+import java.awt.*;
 
 public class Cat {
 
@@ -11,6 +12,7 @@ public class Cat {
         public int width;
         public int height;
         public boolean isAlive;            //a boolean to denote if the hero is alive or dead.
+        public Rectangle hitbox; //a hit box for the cat
 
 
         // METHOD DEFINITION SECTION
@@ -25,17 +27,26 @@ public class Cat {
             xpos = pXpos;
             ypos = pYpos;
             dx =0;
-            dy =1;
+            dy =5;
             width = 60;
             height = 60;
             isAlive = true;
+            hitbox = new Rectangle(xpos, ypos, width, height);
 
         } // constructor
 
         //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
         public void move() {
-            xpos = xpos + dx;
-            ypos = ypos + dy;
+
+            if(xpos>1000){xpos=0-width;} //wrap when hits right wall
+            if(xpos<0-width){xpos=1000;} //wrap when hits left wall
+            if(ypos>700){ypos=0-height;} //wrap when hits bottom wall
+            if(ypos<0-height){ypos=700;} //wrap when it hits top wall
+
+                xpos = xpos + dx;
+                ypos = ypos + dy;
+                hitbox = new Rectangle(xpos, ypos, width, height);
+
 
         }
     }

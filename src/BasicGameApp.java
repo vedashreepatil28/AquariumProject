@@ -108,10 +108,37 @@ public class BasicGameApp implements Runnable {
 		kitty.move();
         rat.move();
         food.move();
-
+        crashing();
 	}
-	
-   //Pauses or sleeps the computer for the amount specified in milliseconds
+
+    public void crashing(){
+        //check to see if my astro's crash into each other
+        //if(kitty.hitbox.intersects(rat.hitbox)&& rat.isAlive == true){
+          //  System.out.println("CRASH!!");
+           // kitty.dy = -kitty.dy;
+          //  rat.dy = -rat.dy;
+            //rat.isAlive = false;
+       // }
+
+        if(kitty.hitbox.intersects(rat.hitbox) && rat.isAlive == true && rat.isCrashing == false){
+            System.out.println("HIT!!");
+            rat.height = rat.height-10;
+            //same as writing astroid1.height = astroid1.height+10
+            rat.isCrashing = true;
+           // rat.isAlive = false;
+        }
+
+        if (!rat.hitbox.intersects(kitty.hitbox)){
+           // System.out.println("no intersection");
+            rat.isCrashing = false;
+        }
+
+
+    }
+
+
+
+    //Pauses or sleeps the computer for the amount specified in milliseconds
    public void pause(int time ){
    		//sleep
 			try {
@@ -158,6 +185,11 @@ public class BasicGameApp implements Runnable {
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 
       //draw the image of the astronaut
+        g.drawRect(food.hitbox.x, food.hitbox.y, food.hitbox.width, food.hitbox.height);
+        /*gives a visual of how the hitbox looks */
+        g.drawRect(kitty.hitbox.x, kitty.hitbox.y, kitty.hitbox.width, kitty.hitbox.height);
+        g.drawRect(rat.hitbox.x, rat.hitbox.y, rat.hitbox.width, rat.hitbox.height);
+
         g.drawImage(backgroundPic, 0, 0, 1000, 700, null);
 		g.drawImage(kittyPic, kitty.xpos, kitty.ypos, kitty.width, kitty.height, null);
         g.drawImage(ratPic, rat.xpos, rat.ypos, rat.width, rat.height, null);
