@@ -11,8 +11,8 @@ public class Cheese {
     public int width;
     public int height;
     public boolean isAlive;//a boolean to denote if the hero is alive or dead.
-    public Rectangle hitbox;    //a hit box for the cheese
-
+    public Rectangle hitbox;//a hit box for the cheese
+    public boolean isCrashing;
 
     // METHOD DEFINITION SECTION
 
@@ -37,6 +37,11 @@ public class Cheese {
 
     //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
     public void move() {
+        if (xpos>1000){dx=-dx;}
+        if (ypos>700){dy=-dy;}
+        if (xpos<0){dx=-dx;}
+        if (ypos<0){dy=-dy;}
+
         xpos = xpos + dx;
         ypos = ypos + dy;
         hitbox = new Rectangle(xpos, ypos, width, height);

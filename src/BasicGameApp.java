@@ -123,7 +123,6 @@ public class BasicGameApp implements Runnable {
         if(kitty.hitbox.intersects(rat.hitbox) && rat.isAlive == true && rat.isCrashing == false){
             System.out.println("HIT!!");
             rat.height = rat.height-10;
-            //same as writing astroid1.height = astroid1.height+10
             rat.isCrashing = true;
            // rat.isAlive = false;
         }
@@ -131,6 +130,18 @@ public class BasicGameApp implements Runnable {
         if (!rat.hitbox.intersects(kitty.hitbox)){
            // System.out.println("no intersection");
             rat.isCrashing = false;
+        }
+
+        if(food.hitbox.intersects(rat.hitbox) && food.isAlive == true && food.isCrashing == false){
+            System.out.println("EATEN");
+            rat.height = rat.height-10;
+            food.isCrashing = true;
+            // rat.isAlive = false;
+        }
+
+        if (!food.hitbox.intersects(rat.hitbox)){
+            // System.out.println("no intersection");
+            food.isCrashing = false;
         }
 
 
