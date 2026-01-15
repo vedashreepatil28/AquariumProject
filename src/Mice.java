@@ -25,8 +25,8 @@ public class Mice {
     public Mice(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
-        dx =6;
-        dy =3;
+        dx =8;
+        dy =5;
         width = 60;
         height = 60;
         isAlive = true;

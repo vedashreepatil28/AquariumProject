@@ -25,8 +25,8 @@ public class Cheese {
     public Cheese(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
-        dx =0;
-        dy =1;
+        dx =7;
+        dy =4;
         width = 60;
         height = 60;
         isAlive = true;

@@ -122,7 +122,10 @@ public class BasicGameApp implements Runnable {
 
         if(kitty.hitbox.intersects(rat.hitbox) && rat.isAlive == true && rat.isCrashing == false){
             System.out.println("HIT!!");
-            rat.height = rat.height-10;
+            rat.height = rat.height-5;
+            rat.hitbox.height= rat.hitbox.height -5;
+            rat.width = rat.width-5;
+            rat.hitbox.width= rat.hitbox.width -5;
             rat.isCrashing = true;
            // rat.isAlive = false;
         }
@@ -134,7 +137,8 @@ public class BasicGameApp implements Runnable {
 
         if(food.hitbox.intersects(rat.hitbox) && food.isAlive == true && food.isCrashing == false){
             System.out.println("EATEN");
-            rat.height = rat.height-10;
+            food.xpos = 1000-food.xpos;
+            food.ypos = 700-food.ypos;
             food.isCrashing = true;
             // rat.isAlive = false;
         }
@@ -204,7 +208,7 @@ public class BasicGameApp implements Runnable {
         g.drawImage(backgroundPic, 0, 0, 1000, 700, null);
 		g.drawImage(kittyPic, kitty.xpos, kitty.ypos, kitty.width, kitty.height, null);
         g.drawImage(ratPic, rat.xpos, rat.ypos, rat.width, rat.height, null);
-        g.drawImage(foodPic,food.xpos, food.ypos, food.width, rat.height, null);
+        g.drawImage(foodPic,food.xpos, food.ypos, food.width, food.height, null);
 
 		g.dispose();
 
