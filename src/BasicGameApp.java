@@ -43,6 +43,7 @@ public class BasicGameApp implements Runnable {
     public Image ratPic;
     public Image foodPic;
     public Image GameOver1;
+    public Image goldFish;
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
@@ -50,6 +51,7 @@ public class BasicGameApp implements Runnable {
     private Mice rat;
     private Cheese food;
     private GameOver GameOver2;
+    private Fish Fish1;
 
 
    // Main method definition
@@ -64,7 +66,8 @@ public class BasicGameApp implements Runnable {
    // This has the same name as the class
    // This section is the setup portion of the program
    // Initialize your variables and construct your program objects here.
-	public BasicGameApp() {
+
+    public BasicGameApp() {
       
       setUpGraphics();
        
@@ -81,18 +84,21 @@ public class BasicGameApp implements Runnable {
         foodPic = Toolkit.getDefaultToolkit().getImage("Cheese.png"); //load the picture
         food = new Cheese(400,100);
 
-        GameOver1 = Toolkit.getDefaultToolkit().getImage("GameOver.png"); //load the picture
-       // GameOver2 = new GameOver(600,400);
+        goldFish = Toolkit.getDefaultToolkit().getImage("Fish.png");
+        Fish1 = new Fish(50,50);
+
+
+
 
 
 	}// BasicGameApp()
 
-   // public void endGame(){
-     //   if (rat.width<15 && rat.height<15){
-       //     GameOver1 = Toolkit.getDefaultToolkit().getImage("GameOver.png"); //load the picture
-         //   GameOver2 = new GameOver(600,400);
-        //}
-    //}
+    public void endGame(){
+        if (rat.width<10 && rat.height<10){
+            GameOver1 = Toolkit.getDefaultToolkit().getImage("GameOver.png"); //load the picture
+            GameOver2 = new GameOver(600,400);
+        }
+    }
 
    
 //*******************************************************************************
@@ -120,8 +126,10 @@ public class BasicGameApp implements Runnable {
 		kitty.move();
         rat.move();
         food.move();
+        Fish1.move();
         crashing();
-        //endGame();
+        endGame();
+
 	}
 
     public void crashing(){
@@ -221,6 +229,7 @@ public class BasicGameApp implements Runnable {
 		g.drawImage(kittyPic, kitty.xpos, kitty.ypos, kitty.width, kitty.height, null);
         g.drawImage(ratPic, rat.xpos, rat.ypos, rat.width, rat.height, null);
         g.drawImage(foodPic,food.xpos, food.ypos, food.width, food.height, null);
+        g.drawImage(goldFish,Fish1.xpos, Fish1.ypos, Fish1.width, Fish1.height, null);
         g.drawImage(GameOver1,200, 150, 600, 400, null);
 
 		g.dispose();

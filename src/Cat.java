@@ -28,8 +28,8 @@ public class Cat {
             ypos = pYpos;
             dx =0;
             dy =5;
-            width = 60;
-            height = 60;
+            width = 100;
+            height = 100;
             isAlive = true;
             hitbox = new Rectangle(xpos, ypos, width, height);
 
