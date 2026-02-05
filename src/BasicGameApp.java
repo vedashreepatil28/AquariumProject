@@ -42,12 +42,14 @@ public class BasicGameApp implements Runnable {
 	public Image kittyPic;
     public Image ratPic;
     public Image foodPic;
+    public Image GameOver1;
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 	private Cat kitty;
     private Mice rat;
     private Cheese food;
+    private GameOver GameOver2;
 
 
    // Main method definition
@@ -79,8 +81,18 @@ public class BasicGameApp implements Runnable {
         foodPic = Toolkit.getDefaultToolkit().getImage("Cheese.png"); //load the picture
         food = new Cheese(400,100);
 
+        GameOver1 = Toolkit.getDefaultToolkit().getImage("GameOver.png"); //load the picture
+       // GameOver2 = new GameOver(600,400);
+
 
 	}// BasicGameApp()
+
+   // public void endGame(){
+     //   if (rat.width<15 && rat.height<15){
+       //     GameOver1 = Toolkit.getDefaultToolkit().getImage("GameOver.png"); //load the picture
+         //   GameOver2 = new GameOver(600,400);
+        //}
+    //}
 
    
 //*******************************************************************************
@@ -109,6 +121,7 @@ public class BasicGameApp implements Runnable {
         rat.move();
         food.move();
         crashing();
+        //endGame();
 	}
 
     public void crashing(){
@@ -147,7 +160,6 @@ public class BasicGameApp implements Runnable {
             // System.out.println("no intersection");
             food.isCrashing = false;
         }
-
 
     }
 
@@ -209,6 +221,7 @@ public class BasicGameApp implements Runnable {
 		g.drawImage(kittyPic, kitty.xpos, kitty.ypos, kitty.width, kitty.height, null);
         g.drawImage(ratPic, rat.xpos, rat.ypos, rat.width, rat.height, null);
         g.drawImage(foodPic,food.xpos, food.ypos, food.width, food.height, null);
+        g.drawImage(GameOver1,200, 150, 600, 400, null);
 
 		g.dispose();
 
