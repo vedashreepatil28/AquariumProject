@@ -40,13 +40,14 @@ public class Fish {
         if(xpos<0-width){xpos=1000;} //wrap when hits left wall
         if(ypos>700){ypos=0-height;} //wrap when hits bottom wall
         if(ypos<0-height){ypos=700;} //wrap when it hits top wall
-        if (isAlive = false){
-
-        }
+//        if (isAlive = false){
+//
+//        }
 
         xpos = xpos + dx;
         ypos = ypos + dy;
         hitbox = new Rectangle(xpos, ypos, width, height);
+        hitbox.setBounds(xpos, ypos, width, height);
 
 
     }

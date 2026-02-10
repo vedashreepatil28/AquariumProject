@@ -39,6 +39,8 @@ public class BasicGameApp implements Runnable {
    
 	public BufferStrategy bufferStrategy;
     public Image backgroundPic;
+    public Image hearts;
+    public Image heart2;
 	public Image kittyPic;
     public Image ratPic;
     public Image foodPic;
@@ -75,10 +77,13 @@ public class BasicGameApp implements Runnable {
        
       //variable and objects
       //create (construct) the objects needed for the game and load up 
-        backgroundPic = Toolkit.getDefaultToolkit().getImage("background.png"); //load the picture
+        backgroundPic = Toolkit.getDefaultToolkit().getImage("background.png");//load the picture
+
+        hearts = Toolkit.getDefaultToolkit().getImage("hearts.png");
+        heart2 = Toolkit.getDefaultToolkit().getImage("hearts.png");
 
         kittyPic = Toolkit.getDefaultToolkit().getImage("cat.png"); //load the picture
-		kitty = new Cat(250,100);
+		kitty = new Cat(450,600);
 
         ratPic = Toolkit.getDefaultToolkit().getImage("rat.png"); //load the picture
         rat = new Mice(400,100);
@@ -87,7 +92,7 @@ public class BasicGameApp implements Runnable {
         food = new Cheese(400,100);
 
         goldFish = Toolkit.getDefaultToolkit().getImage("Fish.png");
-        Fish1 = new Fish(50,50);
+        Fish1 = new Fish(10,10);
         //the size of the images
 
 
@@ -98,6 +103,7 @@ public class BasicGameApp implements Runnable {
         if (rat.width<10 && rat.height<10 && Fish1.isAlive==false){
             GameOver1 = Toolkit.getDefaultToolkit().getImage("GameOver.png"); //load the picture
             GameOver2 = new GameOver(600,400);
+            rat.isAlive = false;
         }
         //prints the Game Over image after the rat and the fish die
     }
@@ -131,7 +137,7 @@ public class BasicGameApp implements Runnable {
         Fish1.move();
         crashing();
         endGame();
-        Fish1.isAlive = true;
+        //Fish1.isAlive = true;
 
 	}
 
@@ -172,10 +178,14 @@ public class BasicGameApp implements Runnable {
             food.isCrashing = false;
         }
 
-        if(Fish1.hitbox.intersects(kitty.hitbox) && Fish1.isAlive == true){
+        if( kitty.hitbox.intersects(Fish1.hitbox) && Fish1.isAlive == true && kitty.isAlive == true){
             System.out.println("Fish Died!");
             Fish1.isAlive = false;
-            // rat.isAlive = false;
+            kitty.height = kitty.height+10;
+            kitty.hitbox.height= kitty.hitbox.height +10;
+            kitty.width = kitty.width+10;
+            kitty.hitbox.width= kitty.hitbox.width +10;
+
         }
 
     }
@@ -229,19 +239,28 @@ public class BasicGameApp implements Runnable {
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 
       //draw the image of the astronaut
-        g.drawRect(food.hitbox.x, food.hitbox.y, food.hitbox.width, food.hitbox.height);
-        /*gives a visual of how the hitbox looks */
-        g.drawRect(kitty.hitbox.x, kitty.hitbox.y, kitty.hitbox.width, kitty.hitbox.height);
-        g.drawRect(rat.hitbox.x, rat.hitbox.y, rat.hitbox.width, rat.hitbox.height);
-        if(Fish1.isAlive == true){g.drawRect(Fish1.hitbox.x, Fish1.hitbox.y, Fish1.hitbox.width, Fish1.hitbox.height);}
+
 
         g.drawImage(backgroundPic, 0, 0, 1000, 700, null);
+        if (Fish1.isAlive == true) {g.drawImage(hearts, 900, 10, 50, 50, null);}
+        if (rat.isAlive == true) {g.drawImage(hearts, 845, 10, 50, 50, null);}
+
 		g.drawImage(kittyPic, kitty.xpos, kitty.ypos, kitty.width, kitty.height, null);
         g.drawImage(ratPic, rat.xpos, rat.ypos, rat.width, rat.height, null);
         g.drawImage(foodPic,food.xpos, food.ypos, food.width, food.height, null);
-        if(Fish1.isAlive == true){g.drawImage(goldFish,Fish1.xpos, Fish1.ypos, Fish1.width, Fish1.height, null);}
-        g.drawImage(GameOver1,200, 150, 600, 400, null);
+        if(Fish1.isAlive == true){
+            g.drawImage(goldFish,Fish1.xpos, Fish1.ypos, Fish1.width, Fish1.height, null);
+    }
 
+
+        g.drawRect(food.hitbox.x, food.hitbox.y, food.hitbox.width, food.hitbox.height);
+        /*gives a visual of how the hitbox looks */
+        g.drawRect(kitty.hitbox.x, kitty.hitbox.y, kitty.hitbox.width, kitty.hitbox.height);
+        if (rat.isAlive==true){g.drawRect(rat.hitbox.x, rat.hitbox.y, rat.hitbox.width, rat.hitbox.height);}
+        if(Fish1.isAlive == true){
+            g.drawRect(Fish1.hitbox.x, Fish1.hitbox.y, Fish1.hitbox.width, Fish1.hitbox.height);
+        }
+        g.drawImage(GameOver1,200, 150, 600, 400, null);
 		g.dispose();
 
 		bufferStrategy.show();
