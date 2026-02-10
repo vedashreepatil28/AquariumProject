@@ -44,6 +44,7 @@ public class BasicGameApp implements Runnable {
     public Image foodPic;
     public Image GameOver1;
     public Image goldFish;
+    //all different images of all characters and background
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
@@ -52,6 +53,7 @@ public class BasicGameApp implements Runnable {
     private Cheese food;
     private GameOver GameOver2;
     private Fish Fish1;
+    //all different characters in the game
 
 
    // Main method definition
@@ -86,18 +88,18 @@ public class BasicGameApp implements Runnable {
 
         goldFish = Toolkit.getDefaultToolkit().getImage("Fish.png");
         Fish1 = new Fish(50,50);
-
-
+        //the size of the images
 
 
 
 	}// BasicGameApp()
 
     public void endGame(){
-        if (rat.width<10 && rat.height<10){
+        if (rat.width<10 && rat.height<10 && Fish1.isAlive==false){
             GameOver1 = Toolkit.getDefaultToolkit().getImage("GameOver.png"); //load the picture
             GameOver2 = new GameOver(600,400);
         }
+        //prints the Game Over image after the rat and the fish die
     }
 
    
@@ -129,6 +131,7 @@ public class BasicGameApp implements Runnable {
         Fish1.move();
         crashing();
         endGame();
+        Fish1.isAlive = true;
 
 	}
 
@@ -167,6 +170,12 @@ public class BasicGameApp implements Runnable {
         if (!food.hitbox.intersects(rat.hitbox)){
             // System.out.println("no intersection");
             food.isCrashing = false;
+        }
+
+        if(Fish1.hitbox.intersects(kitty.hitbox) && Fish1.isAlive == true){
+            System.out.println("Fish Died!");
+            Fish1.isAlive = false;
+            // rat.isAlive = false;
         }
 
     }
@@ -224,12 +233,13 @@ public class BasicGameApp implements Runnable {
         /*gives a visual of how the hitbox looks */
         g.drawRect(kitty.hitbox.x, kitty.hitbox.y, kitty.hitbox.width, kitty.hitbox.height);
         g.drawRect(rat.hitbox.x, rat.hitbox.y, rat.hitbox.width, rat.hitbox.height);
+        if(Fish1.isAlive == true){g.drawRect(Fish1.hitbox.x, Fish1.hitbox.y, Fish1.hitbox.width, Fish1.hitbox.height);}
 
         g.drawImage(backgroundPic, 0, 0, 1000, 700, null);
 		g.drawImage(kittyPic, kitty.xpos, kitty.ypos, kitty.width, kitty.height, null);
         g.drawImage(ratPic, rat.xpos, rat.ypos, rat.width, rat.height, null);
         g.drawImage(foodPic,food.xpos, food.ypos, food.width, food.height, null);
-        g.drawImage(goldFish,Fish1.xpos, Fish1.ypos, Fish1.width, Fish1.height, null);
+        if(Fish1.isAlive == true){g.drawImage(goldFish,Fish1.xpos, Fish1.ypos, Fish1.width, Fish1.height, null);}
         g.drawImage(GameOver1,200, 150, 600, 400, null);
 
 		g.dispose();
