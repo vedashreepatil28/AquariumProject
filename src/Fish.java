@@ -10,6 +10,8 @@ public class Fish {
     public int height;
     public boolean isAlive;            //a boolean to denote if the hero is alive or dead.
     public Rectangle hitbox; //a hit box for the cat
+    public int randomdx;
+    public int randomdy;
 
 
     // METHOD DEFINITION SECTION
@@ -21,10 +23,13 @@ public class Fish {
     //This is a SECOND constructor that takes 3 parameters.  This allows us to specify the hero's name and position when we build it.
     // if you put in a String, an int and an int the program will use this constructor instead of the one above.
     public Fish(int pXpos, int pYpos) {
+        randomdx = (int)(Math.random()*10);
+        randomdy = (int)(Math.random()*10);
+
         xpos = pXpos;
         ypos = pYpos;
-        dx =8;
-        dy =2;
+        dx =randomdx;
+        dy =randomdy;
         width = 50;
         height = 50;
         isAlive = true;
@@ -40,9 +45,8 @@ public class Fish {
         if(xpos<0-width){xpos=1000;} //wrap when hits left wall
         if(ypos>700){ypos=0-height;} //wrap when hits bottom wall
         if(ypos<0-height){ypos=700;} //wrap when it hits top wall
-//        if (isAlive = false){
-//
-//        }
+
+
 
         xpos = xpos + dx;
         ypos = ypos + dy;
