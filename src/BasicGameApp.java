@@ -57,6 +57,8 @@ public class BasicGameApp implements Runnable {
     private Fish Fish1;
     //all different characters in the game
 
+    public int x;
+
 
    // Main method definition
    // This is the code that runs first and automatically
@@ -137,7 +139,7 @@ public class BasicGameApp implements Runnable {
         Fish1.move();
         crashing();
         endGame();
-        //Fish1.isAlive = true;
+        counter();
 
 	}
 
@@ -187,6 +189,12 @@ public class BasicGameApp implements Runnable {
             kitty.hitbox.width= kitty.hitbox.width +10;
 
         }
+
+    }
+
+    public void counter(){
+        if ( rat.hitbox.intersects(food.hitbox)){x=x+5;}
+        if ( rat.hitbox.intersects(food.hitbox)){ System.out.println("current points: " + x);}
 
     }
 
