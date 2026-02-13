@@ -19,7 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
-// Class Definition Section
+// Class, all the code is called in the class.
 
 public class BasicGameApp implements Runnable {
 
@@ -35,7 +35,7 @@ public class BasicGameApp implements Runnable {
 	public Canvas canvas;
    public JPanel panel;
 
-    //all images of all characters and background
+    //all images of all characters and background using bufferStrategy
 	public BufferStrategy bufferStrategy;
     public Image backgroundPic;
     public Image hearts;
@@ -66,29 +66,28 @@ public class BasicGameApp implements Runnable {
 
 
    // main Constructor Method
-
     public BasicGameApp() {
       
       setUpGraphics();
        
       //variable and objects
       //create (construct) the objects needed for the game and load up 
-        backgroundPic = Toolkit.getDefaultToolkit().getImage("background.png");//load the picture
+        backgroundPic = Toolkit.getDefaultToolkit().getImage("background.png"); //load/construct the picture
 
-        hearts = Toolkit.getDefaultToolkit().getImage("hearts.png");
-        heart2 = Toolkit.getDefaultToolkit().getImage("hearts.png");
+        hearts = Toolkit.getDefaultToolkit().getImage("hearts.png"); //load/construct the picture
+        heart2 = Toolkit.getDefaultToolkit().getImage("hearts.png"); //load/construct the picture
 
-        kittyPic = Toolkit.getDefaultToolkit().getImage("cat.png"); //load the picture
-		kitty = new Cat(450,600);
+        kittyPic = Toolkit.getDefaultToolkit().getImage("cat.png"); //load/construct the picture
+		kitty = new Cat(450,600); //the size of the images
 
-        ratPic = Toolkit.getDefaultToolkit().getImage("rat.png"); //load the picture
+        ratPic = Toolkit.getDefaultToolkit().getImage("rat.png");  //load/construct the picture
         rat = new Mice(400,100);
 
-        foodPic = Toolkit.getDefaultToolkit().getImage("Cheese.png"); //load the picture
+        foodPic = Toolkit.getDefaultToolkit().getImage("Cheese.png"); //load/construct the picture
         food = new Cheese(400,100);
 
-        goldFish = Toolkit.getDefaultToolkit().getImage("Fish.png");
-        Fish1 = new Fish(10,10); //the size of the images
+        goldFish = Toolkit.getDefaultToolkit().getImage("Fish.png"); //load/construct the picture
+        Fish1 = new Fish(10,10);
 
 
 
@@ -96,16 +95,16 @@ public class BasicGameApp implements Runnable {
 
     //method
     public void endGame(){
-        //prints the Game Over image after the rat and the fish die
+        //if statement, prints the Game Over image after the rat and the fish die
         if (rat.width<10 && rat.height<10 && Fish1.isAlive==false){
-            GameOver1 = Toolkit.getDefaultToolkit().getImage("GameOver.png"); //load the picture
+            GameOver1 = Toolkit.getDefaultToolkit().getImage("GameOver.png"); //load/construct the picture
             GameOver2 = new GameOver(600,400);
             rat.isAlive = false;
         }
 
     }
 
-    //a method that loops all methods while game is runing
+    //a method that loops all methods while game is running
 	public void run() {
 
 		while (true) {
@@ -131,11 +130,10 @@ public class BasicGameApp implements Runnable {
 
     //method
     public void counter(){
-        //this is a counter to count the points/the number times the cheese intersects with the rat
+        //this is a counter to count the points: everytime the cheese intersects with the rat, +5 points
 
         if ( rat.hitbox.intersects(food.hitbox)){x=x+5;}
         if ( rat.hitbox.intersects(food.hitbox)){ System.out.println("current points: " + x);}
-
     }
 
     //method
@@ -150,24 +148,21 @@ public class BasicGameApp implements Runnable {
             rat.hitbox.width= rat.hitbox.width -5;
             rat.isCrashing = true;
         }
-        // is is so the rat doesn't shrink too many times in one intersection.
+        // it is so the rat doesn't shrink too many times in one intersection.
         if (!rat.hitbox.intersects(kitty.hitbox)){
-           // System.out.println("no intersection");
             rat.isCrashing = false;
         }
 
-        //when the cheese intersects with the rat, the cheese teleports to another space
+        //when the cheese intersects with the rat, the cheese teleports to the opposite space
         if(food.hitbox.intersects(rat.hitbox) && food.isAlive == true && food.isCrashing == false){
             System.out.println("EATEN");
             food.xpos = 1000-food.xpos;
             food.ypos = 700-food.ypos;
             food.isCrashing = true;
-            // rat.isAlive = false;
         }
 
         //so the cheese doesn't react multiple times in one intersection
         if (!food.hitbox.intersects(rat.hitbox)){
-            // System.out.println("no intersection");
             food.isCrashing = false;
         }
 
@@ -175,6 +170,7 @@ public class BasicGameApp implements Runnable {
         if( kitty.hitbox.intersects(Fish1.hitbox) && Fish1.isAlive == true && kitty.isAlive == true){
             System.out.println("Fish Died!");
             Fish1.isAlive = false;
+            //the cat's height with and hitbox will increase by 10
             kitty.height = kitty.height+10;
             kitty.hitbox.height= kitty.hitbox.height +10;
             kitty.width = kitty.width+10;
@@ -235,15 +231,17 @@ public class BasicGameApp implements Runnable {
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 
       //draw the image of the characters and all images including background
-
-
+        //draws background first
         g.drawImage(backgroundPic, 0, 0, 1000, 700, null);
+        //the heart only appears if the fish is alive
         if (Fish1.isAlive == true) {g.drawImage(hearts, 900, 10, 50, 50, null);}
+        //the heart only appears if the rat is alive/larger than 10 by 10
         if (rat.isAlive == true) {g.drawImage(hearts, 845, 10, 50, 50, null);}
 
 		g.drawImage(kittyPic, kitty.xpos, kitty.ypos, kitty.width, kitty.height, null);
         g.drawImage(ratPic, rat.xpos, rat.ypos, rat.width, rat.height, null);
         g.drawImage(foodPic,food.xpos, food.ypos, food.width, food.height, null);
+       //only draws fish if it is alive
         if(Fish1.isAlive == true){
             g.drawImage(goldFish,Fish1.xpos, Fish1.ypos, Fish1.width, Fish1.height, null);
     }
@@ -252,18 +250,18 @@ public class BasicGameApp implements Runnable {
         g.drawRect(food.hitbox.x, food.hitbox.y, food.hitbox.width, food.hitbox.height);
         /*gives a visual of how the hitbox looks */
         g.drawRect(kitty.hitbox.x, kitty.hitbox.y, kitty.hitbox.width, kitty.hitbox.height);
-        //so the rat disappears once it is too small and the fish disappears if it interacts with kitty
+        //so the rat's hitbox disappears once it is too small
         if (rat.isAlive==true){g.drawRect(rat.hitbox.x, rat.hitbox.y, rat.hitbox.width, rat.hitbox.height);}
+       //and the fish's hitbox disappears if it intersects with kitty
         if(Fish1.isAlive == true){
             g.drawRect(Fish1.hitbox.x, Fish1.hitbox.y, Fish1.hitbox.width, Fish1.hitbox.height);
         }
         g.drawImage(GameOver1,200, 150, 600, 400, null);
 
-
+        //shows the points on the top left side of the screen for everytime the rat and cheese intercect.
         g.setColor(Color.black);
-        g.drawString("Points: " + x, 50,50);
+        g.drawString("Points: " + x, 10,50);
 		g.dispose();
-        //draws points on screen
 
 		bufferStrategy.show();
 	}

@@ -2,26 +2,23 @@ import java.awt.*;
 
 public class Mice {
     //VARIABLE DECLARATION SECTION
-    //Here's where you state which variables you are going to use.
-    public String name;                //holds the name of the hero
+    public String name;                //holds the name of the object
     public int xpos;                //the x position
     public int ypos;                //the y position
-    public int dx;                    //the speed of the hero in the x direction
-    public int dy;                    //the speed of the hero in the y direction
-    public int width;
-    public int height;
-    public boolean isAlive;            //a boolean to denote if the hero is alive or dead.
-    public Rectangle hitbox; //a hit box for the rat
-    public boolean isCrashing;
+    public int dx;                    //the speed of the object in the x direction
+    public int dy;                    //the speed of the object in the y direction
+    public int width;                   // variable for the width of the object
+    public int height;                 // variable for the height of the object
+    public boolean isAlive;            //a boolean to denote if the object is alive or dead.
+    public Rectangle hitbox;            //a hit box for the mice
+    public boolean isCrashing;          //boolean to regulate whether the object is crashing
 
-    // METHOD DEFINITION SECTION
 
     // Constructor Definition
     // A constructor builds the object when called and sets variable values.
 
-
-    //This is a SECOND constructor that takes 3 parameters.  This allows us to specify the hero's name and position when we build it.
-    // if you put in a String, an int and an int the program will use this constructor instead of the one above.
+    //This is a  constructor that takes 2 parameters.  This allows us to specify the object's position when we build it.        
+    // if you put in an int and an int the program will use this constructor.
     public Mice(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
@@ -34,18 +31,19 @@ public class Mice {
         isCrashing = false;
 
 
-    } // constructor
+    }
 
-    //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
+    //The move method.  Everytime this is run (or "called") the object's x position and y position change by dx and dy
+    // this also shows how the object will move, in this example it will bounce off of all walls
     public void move() {
-        if (xpos>1000){dx=-dx;}
-        if (ypos>700){dy=-dy;}
-        if (xpos<0){dx=-dx;}
-        if (ypos<0){dy=-dy;}
+        if (xpos>1000){dx=-dx;} //bounce off right wall
+        if (ypos>700){dy=-dy;} //bounce off bottom wall
+        if (xpos<0){dx=-dx;} // bounce off left wall
+        if (ypos<0){dy=-dy;} //bounce off top wall
 
-        xpos = xpos + dx;
-        ypos = ypos + dy;
-        hitbox = new Rectangle(xpos, ypos, width, height);
+        xpos = xpos + dx;   //defines xpos
+        ypos = ypos + dy;   //defines ypos
+        hitbox = new Rectangle(xpos, ypos, width, height); //creates a hitbox with parameters that define the shape and size.
 
     }
 }
